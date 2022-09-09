@@ -4,13 +4,10 @@ block content
     h1 A Simple Attendance App
     p 
         a(href=`/install`) Add to Zoom
-    p Simply upload a text file containing the names of people you would like to check for attendance. The file should contain 1 name per line.
-    p 
-        | After the file has been added, the app will check every 2 seconds for a participant with that name. 
-        | If a name is found, it is not displayed.
-        | If a name is not found, the name will appear as "Absent".
-        | If a participant is found that is not in the list, it will appear as "Not in List"
-    img(src='/img/app-screenshot.png' width=400)
+    p Simply upload a text file containing the names of participants. The file should contain 1 name per line (FirstName LastName).
+    p The attendance list updates every 2 seconds.
+    p You can export a CSV of the attendance by copying the "CSV Data" section and pasting it into a web browser.
+    img(src='/img/app-screenshot.png' style="max-width=600px")
     p 
         a(href=`/install`) Add to Zoom
 
