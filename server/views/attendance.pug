@@ -5,10 +5,14 @@ block content
     p 1. Upload Name List
     input(type='file' id='attendance-file')
     p 2. List updates every 2 seconds 
-    p 
-        button(id='attendance-button' disabled) Force Update
-        span &nbsp;
-        a(id='download-button' disabled) Download CSV
+    p
+        | CSV Data: 
+        input(type=text id='download-url' disabled)
+        | &nbsp;
+        span(id='copied-text' class='hidden') Copied!
+        
+        
+        
     div(id='attendance-table')
 
 append scripts

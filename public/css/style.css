@@ -7,11 +7,15 @@ body {
     max-width: 800px;
     background: white;
     border: 1px solid;
-    padding: 0 1em;
+    padding: 0 1em 1em;
     box-shadow: 5px 5px 5px grey;
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
+    min-height: calc(90vh);
+    margin-top:auto;
+    margin-bottom:auto;
+    overflow: auto;
 }
 
 a {
@@ -24,4 +28,19 @@ a {
 
 .highlight-present {
   background: rgb(150, 231, 150);
+}
+
+.hidden {
+  display: none;
+}
+
+.fade {
+  animation: fadeOut 2s;
+  visibility: hidden;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; visibility: visible;}
+  99% { opacity: 0.01; visibility: visible;}
+  100% { opacity: 0; visibility: hidden;}
 }

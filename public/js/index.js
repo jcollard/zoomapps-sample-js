@@ -34,10 +34,8 @@ function processFile(event) {
     students = entries.filter((s) => s.length > 0).map((s) => splitName(s));
     buildSearchTable();
     updateTable();
-    const attendanceButton = document.getElementById('attendance-button');
-    attendanceButton.disabled = false;
-    const downloadButton = document.getElementById('download-button');
-    downloadButton.disabled = false;
+    const downloadURL = document.getElementById('download-url');
+    downloadURL.disabled = false;
     takeAttendance();
     setInterval(async () => takeAttendance(), 2500);
 }
@@ -76,12 +74,8 @@ function updateTable() {
             )
             .join('\n');
     const encoded = encodeURI(output);
-    var link = document.createElement('a');
-    link.setAttribute('href', encoded);
-    link.setAttribute('download', 'my_data.csv');
-    const downloadCSV = document.getElementById('download-button');
-    downloadCSV.href = encoded;
-    downloadCSV.download = `Attendance - ${new Date().toDateString()}`;
+    const downloadCSV = document.getElementById('download-url');
+    downloadCSV.value = encoded;
 }
 
 function uploadNameList() {
@@ -134,6 +128,21 @@ function addUnknownStudent(rawName) {
     students.push(unknown);
 }
 
+function copyDownloadURL() {
+    const downloadInput = document.getElementById('download-url');
+    downloadInput.select();
+    const copiedText = document.getElementById('copied-text');
+    copiedText.classList.remove('hidden');
+    copiedText.classList.add('fade');
+    navigator.clipboard.writeText(downloadInput.value);
+    setTimeout(() => {
+        copiedText.classList.add('hidden');
+    }, 2000);
+    setTimeout(() => {
+        copiedText.classList.remove('fade');
+    }, 2001);
+}
+
 (async () => {
     try {
         const configResponse = await zoomSdk.config({
@@ -150,8 +159,8 @@ function addUnknownStudent(rawName) {
         const nameUpload = document.getElementById('attendance-file');
         nameUpload.addEventListener('change', () => uploadNameList());
 
-        const attendanceButton = document.getElementById('attendance-button');
-        attendanceButton.addEventListener('click', () => takeAttendance());
+        const downloadInput = document.getElementById('download-url');
+        downloadInput.addEventListener('click', () => copyDownloadURL());
     } catch (e) {
         console.error(e);
     }
