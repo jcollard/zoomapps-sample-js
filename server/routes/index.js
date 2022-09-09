@@ -28,6 +28,16 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/zoomverify/verifyzoom.html', async (req, res, next) => {
+    try {
+        sanitize(req);
+
+        return res.sendFile('public/html/zoomverify.html', { root: './' });
+    } catch (e) {
+        next(handleError(e));
+    }
+});
+
 router.get('/attendance', async (req, res, next) => {
     try {
         sanitize(req);
