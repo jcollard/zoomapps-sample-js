@@ -32,7 +32,7 @@ router.get('/zoomverify/verifyzoom.html', async (req, res, next) => {
     try {
         sanitize(req);
 
-        return res.sendFile('public/html/zoomverify.html', { root: './' });
+        return res.sendFile('public/html/verifyzoom.html', { root: './' });
     } catch (e) {
         next(handleError(e));
     }
