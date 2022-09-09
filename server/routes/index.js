@@ -28,6 +28,23 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/attendance', async (req, res, next) => {
+    try {
+        sanitize(req);
+
+        const header = req.header(contextHeader);
+
+        const isZoom = header && getAppContext(header);
+
+        return res.render('attendance', {
+            isZoom,
+            title: `Simple Attendance`,
+        });
+    } catch (e) {
+        next(handleError(e));
+    }
+});
+
 /*
  * Install Route - Install the Zoom App from the Zoom Marketplace
  * this route is used when a user installs the app from the Zoom Client
