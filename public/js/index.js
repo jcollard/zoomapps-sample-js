@@ -15,8 +15,13 @@ function splitName(name) {
 }
 
 function studentToRow(student) {
-    const klass =
-        student.attendance === 'Not in List' ? 'class="highlight-unknown"' : '';
+    let klass = '';
+    student.attendance === 'Not in List' ? 'class="highlight-unknown"' : '';
+    if (student.attendance === 'Not in List') {
+        klass = 'class="highlight-unknown"';
+    } else if (student.attendance === 'Present') {
+        klass = 'class="highlight-present"';
+    }
     return `<tr ${klass}><td >${student.last}</td><td>${student.first}</td><td>${student.attendance}</td></tr>`;
 }
 
@@ -47,17 +52,16 @@ function buildSearchTable() {
     }
 }
 
-function filterStudent(student) {
-    return student.attendance !== 'Present';
+function compareStudent(a, b) {
+    if (a.attendance === 'Present' && b.attendance !== 'Present') return 1;
+    if (b.attendance === 'Present' && a.attendance !== 'Present') return -1;
+    return a.last < b.last ? -1 : 1;
 }
 
 function updateTable() {
-    students.sort((a, b) => (a.last < b.last ? -1 : 1));
+    students.sort(compareStudent);
     const div = document.getElementById('attendance-table');
-    const tableData = students
-        .filter(filterStudent)
-        .map(studentToRow)
-        .join('\n');
+    const tableData = students.map(studentToRow).join('\n');
     div.innerHTML = `<table>
     <tr><td>Last</td><td>First</td><td>Status</td></tr>
     ${tableData}

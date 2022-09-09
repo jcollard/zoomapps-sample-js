@@ -1,14 +1,18 @@
 extends layout
 
 block content
-    h1=title
-    if isZoom
-        p Welcome to your Zoom App
-        a(href=`javascript:void(0)`) Quick Attendance
-    else
-        p You're viewing your Zoom App through the browser.&nbsp;
-            a(href=`/install`) Click Here
-            | &nbsp;to install your app in Zoom.
+    h1 A Simple Attendance App
+    p 
+        a(href=`/install`) Add to Zoom
+    p Simply upload a text file containing the names of people you would like to check for attendance. The file should contain 1 name per line.
+    p 
+        | After the file has been added, the app will check every 2 seconds for a participant with that name. 
+        | If a name is found, it is not displayed.
+        | If a name is not found, the name will appear as "Absent".
+        | If a participant is found that is not in the list, it will appear as "Not in List"
+    img(src='/img/app-screenshot.png' width=400)
+    p 
+        a(href=`/install`) Add to Zoom
 
 append scripts
     if isZoom

@@ -1,6 +1,6 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 800px;
 }
 
 a {
@@ -9,4 +9,8 @@ a {
 
 .highlight-unknown {
   background: #fff23dc5;
+}
+
+.highlight-present {
+  background: rgb(150, 231, 150);
 }
